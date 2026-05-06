@@ -1,0 +1,27 @@
+[
+  {
+    "id": "1",
+    "title": "School Dashboard",
+    "description": "A comprehensive dashboard for school management.",
+    "customer": "John Customer",
+    "customerId": "2",
+    "status": "In Progress",
+    "progress": 70,
+    "deadline": "2026-06-10",
+    "priority": "High",
+    "requirements": "Need student attendance, grade tracking, and parent portal.",
+    "createdAt": "2026-05-01T10:00:00.000Z"
+  },
+  {
+    "id": "1778090899540",
+    "title": "HEHE",
+    "description": "EHEHEH",
+    "deadline": "2026-05-10",
+    "priority": "Medium",
+    "requirements": "FHFHb",
+    "status": "Pending",
+    "progress": 0,
+    "customerId": "2",
+    "createdAt": "2026-05-06T18:08:19.540Z"
+  }
+]
