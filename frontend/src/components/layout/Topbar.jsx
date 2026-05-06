@@ -2,37 +2,39 @@ import { Menu, Search, Bell } from 'lucide-react';
 
 const Topbar = ({ toggleSidebar }) => {
   return (
-    <header className="h-16 border-b border-white/10 bg-background/50 backdrop-blur-md sticky top-0 z-30 px-4 flex items-center justify-between">
+    <header className="h-10 border-b border-border bg-sidebar flex items-center justify-between px-4 sticky top-0 z-30">
       <div className="flex items-center gap-4 flex-1">
         <button 
           onClick={toggleSidebar}
-          className="lg:hidden p-2 hover:bg-white/5 rounded-lg"
+          className="lg:hidden p-1 hover:bg-white/5 rounded text-secondary"
         >
-          <Menu size={24} />
+          <Menu size={18} />
         </button>
-
-        <div className="relative max-w-md w-full hidden md:block">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-secondary" size={18} />
-          <input 
-            type="text" 
-            placeholder="Search anything..." 
-            className="w-full bg-white/5 border border-white/10 rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
-          />
+        <div className="flex items-center gap-2 text-[11px] text-secondary font-medium">
+          <span className="hover:text-white cursor-pointer transition-colors">File</span>
+          <span className="hover:text-white cursor-pointer transition-colors">Edit</span>
+          <span className="hover:text-white cursor-pointer transition-colors">Selection</span>
+          <span className="hover:text-white cursor-pointer transition-colors">View</span>
+          <span className="hover:text-white cursor-pointer transition-colors">Go</span>
+          <span className="hover:text-white cursor-pointer transition-colors">Run</span>
+          <span className="hover:text-white cursor-pointer transition-colors">Terminal</span>
+          <span className="hover:text-white cursor-pointer transition-colors">Help</span>
         </div>
       </div>
 
+      <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 bg-background border border-border rounded-md px-12 py-1 text-[11px] text-secondary min-w-[300px] justify-center hover:border-primary/50 cursor-text transition-all">
+        <Search size={12} />
+        <span>FlowSync CRM — workspace.json</span>
+      </div>
+
       <div className="flex items-center gap-2">
-        <button className="p-2 hover:bg-white/5 rounded-lg relative text-secondary hover:text-white transition-colors">
-          <Bell size={20} />
-          <span className="absolute top-2 right-2 w-2 h-2 bg-accent rounded-full border-2 border-background"></span>
+        <button className="p-1 hover:bg-white/5 rounded text-secondary hover:text-white transition-colors">
+          <Bell size={16} />
         </button>
-        <div className="h-8 w-[1px] bg-white/10 mx-2"></div>
-        <div className="hidden sm:block">
-          <p className="text-xs text-secondary">System Status</p>
-          <p className="text-xs font-semibold text-success flex items-center gap-1">
-            <span className="w-1.5 h-1.5 bg-success rounded-full animate-pulse"></span>
-            Operational
-          </p>
+        <div className="h-4 w-[1px] bg-border mx-1"></div>
+        <div className="text-[11px] font-mono text-primary flex items-center gap-1 bg-primary/5 px-2 py-0.5 rounded border border-primary/20">
+          <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></span>
+          main*
         </div>
       </div>
     </header>

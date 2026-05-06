@@ -47,12 +47,13 @@ function App() {
             <DashboardLayout />
           </ProtectedRoute>
         }>
+          <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="projects" element={<ProjectManagement />} />
           <Route path="kanban" element={<KanbanBoard />} />
-          <Route path="customers" element={<div className="p-8 text-center text-secondary">Customers Page (Coming Soon)</div>} />
-          <Route path="analytics" element={<div className="p-8 text-center text-secondary">Analytics Page (Coming Soon)</div>} />
-          <Route path="settings" element={<div className="p-8 text-center text-secondary">Settings Page (Coming Soon)</div>} />
+          <Route path="customers" element={<div className="p-8 text-center text-secondary font-mono">Customers Page (Coming Soon)</div>} />
+          <Route path="analytics" element={<div className="p-8 text-center text-secondary font-mono">Analytics Page (Coming Soon)</div>} />
+          <Route path="settings" element={<div className="p-8 text-center text-secondary font-mono">Settings Page (Coming Soon)</div>} />
         </Route>
 
         {/* Customer Routes */}
@@ -61,10 +62,11 @@ function App() {
             <DashboardLayout />
           </ProtectedRoute>
         }>
+          <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<CustomerDashboard />} />
           <Route path="projects" element={<CustomerDashboard />} />
           <Route path="create-project" element={<CreateProject />} />
-          <Route path="settings" element={<div className="p-8 text-center text-secondary">Settings Page (Coming Soon)</div>} />
+          <Route path="settings" element={<div className="p-8 text-center text-secondary font-mono">Settings Page (Coming Soon)</div>} />
         </Route>
 
         {/* 404 */}

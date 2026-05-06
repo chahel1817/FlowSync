@@ -7,58 +7,59 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen bg-background selection:bg-accent/30">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-background/50 backdrop-blur-md border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <nav className="fixed top-0 w-full z-50 bg-background/50 backdrop-blur-md border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center">
-              <Briefcase size={24} className="text-white" />
+            <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
+              <Briefcase size={20} className="text-white" />
             </div>
-            <span className="text-2xl font-bold tracking-tight">FlowSync</span>
+            <span className="text-xl font-bold tracking-tight font-mono">FlowSync</span>
           </div>
           
-          <div className="hidden md:flex items-center gap-8 text-secondary font-medium">
+          <div className="hidden md:flex items-center gap-8 text-[13px] text-secondary font-medium font-mono">
             <a href="#features" className="hover:text-white transition-colors">Features</a>
             <a href="#solutions" className="hover:text-white transition-colors">Solutions</a>
             <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
           </div>
 
           <div className="flex items-center gap-4">
-            <Link to="/login" className="text-secondary hover:text-white transition-colors font-medium">Login</Link>
+            <Link to="/login" className="text-[13px] text-secondary hover:text-white transition-colors font-medium font-mono">Login</Link>
             <Link to="/login">
-              <Button>Get Started</Button>
+              <Button size="sm" className="font-mono text-[12px]">Get Started</Button>
             </Link>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-40 pb-24 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-accent/20 rounded-full blur-[120px] -z-10"></div>
+      <section className="relative pt-32 pb-20 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[400px] bg-primary/10 rounded-full blur-[100px] -z-10"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <span className="px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-bold tracking-wide uppercase">
-              Now in Public Beta
+            <span className="px-3 py-1 rounded bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold tracking-widest uppercase font-mono">
+              V4.2 RELEASED
             </span>
-            <h1 className="mt-8 text-6xl md:text-8xl font-extrabold tracking-tight leading-[1.1]">
-              The CRM built for <br />
-              <span className="text-accent italic">high-velocity</span> teams
+            <h1 className="mt-8 text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] font-mono">
+              Manage Projects <span className="text-primary italic underline decoration-wavy underline-offset-8">Smarter</span>
             </h1>
-            <p className="mt-8 max-w-2xl mx-auto text-xl text-secondary leading-relaxed">
-              FlowSync helps you manage complex projects, track customer progress, and deliver results faster with a beautiful, intuitive interface.
+            <p className="mt-6 max-w-2xl mx-auto text-lg text-secondary leading-relaxed font-mono">
+              Track progress, collaborate with clients, and monitor workflows seamlessly with FlowSync's developer-first CRM.
             </p>
-            <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link to="/login">
-                <Button className="h-14 px-8 text-lg flex items-center gap-2">
-                  Start Managing Projects <ArrowRight size={20} />
+                <Button className="h-12 px-8 text-sm flex items-center gap-2 font-bold font-mono">
+                  Get Started <ArrowRight size={18} />
                 </Button>
               </Link>
-              <Button variant="outline" className="h-14 px-8 text-lg">
-                Watch Demo
-              </Button>
+              <Link to="/login">
+                <Button variant="outline" className="h-12 px-8 text-sm font-bold font-mono">
+                  Explore Dashboard
+                </Button>
+              </Link>
             </div>
           </motion.div>
 

@@ -2,11 +2,12 @@ import { cn } from "../../utils/cn";
 
 const Button = ({ className, variant = "primary", size = "md", children, ...props }) => {
   const variants = {
-    primary: "bg-accent hover:bg-accent/90 text-white",
-    secondary: "bg-white/10 hover:bg-white/20 text-white",
-    outline: "bg-transparent border border-white/10 hover:bg-white/5 text-white",
-    ghost: "bg-transparent hover:bg-white/5 text-white",
+    primary: "bg-primary hover:bg-primary/90 text-white shadow-sm shadow-primary/20",
+    secondary: "bg-white/5 border border-border hover:bg-white/10 text-white",
+    outline: "bg-transparent border border-border hover:bg-white/5 text-white",
+    ghost: "bg-transparent hover:bg-white/5 text-[#8b949e] hover:text-white",
     danger: "bg-danger hover:bg-danger/90 text-white",
+    success: "bg-success hover:bg-success/90 text-white",
   };
 
   const sizes = {

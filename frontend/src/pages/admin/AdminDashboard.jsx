@@ -26,25 +26,23 @@ const chartData = [
 ];
 
 const StatCard = ({ title, value, icon: Icon, trend, trendValue, color }) => (
-  <Card className="relative overflow-hidden group">
-    <div className={`absolute top-0 right-0 w-24 h-24 -mr-8 -mt-8 bg-${color}/10 rounded-full blur-2xl group-hover:bg-${color}/20 transition-all duration-500`}></div>
-    <CardContent className="flex items-center justify-between">
+  <Card className="relative overflow-hidden group border-l-2 border-l-primary">
+    <CardContent className="flex items-center justify-between py-4 px-5">
       <div>
-        <p className="text-secondary text-sm font-medium">{title}</p>
-        <h3 className="text-2xl font-bold mt-1">{value}</h3>
+        <p className="text-[#8b949e] text-[11px] font-bold uppercase tracking-wider font-mono">{title}</p>
+        <h3 className="text-2xl font-bold mt-1 font-mono text-white tracking-tighter">{value}</h3>
         <div className="flex items-center gap-1 mt-2">
           {trend === 'up' ? (
-            <ArrowUpRight size={16} className="text-success" />
+            <ArrowUpRight size={14} className="text-success" />
           ) : (
-            <ArrowDownRight size={16} className="text-danger" />
+            <ArrowDownRight size={14} className="text-danger" />
           )}
-          <span className={`text-xs font-semibold ${trend === 'up' ? 'text-success' : 'text-danger'}`}>
+          <span className={`text-[10px] font-bold font-mono ${trend === 'up' ? 'text-success' : 'text-danger'}`}>
             {trendValue}
           </span>
-          <span className="text-xs text-secondary ml-1">vs last month</span>
         </div>
       </div>
-      <div className={`w-12 h-12 bg-${color}/10 rounded-xl flex items-center justify-center text-${color}`}>
+      <div className={`text-${color} opacity-40 group-hover:opacity-100 transition-opacity`}>
         <Icon size={24} />
       </div>
     </CardContent>
@@ -105,32 +103,34 @@ const AdminDashboard = () => {
               <AreaChart data={chartData}>
                 <defs>
                   <linearGradient id="colorProjects" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#3B82F6" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#58a6ff" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#58a6ff" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff10" />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#30363d" />
                 <XAxis 
                   dataKey="name" 
-                  stroke="#64748B" 
-                  fontSize={12} 
+                  stroke="#8b949e" 
+                  fontSize={10} 
                   tickLine={false} 
                   axisLine={false} 
+                  fontFamily="monospace"
                 />
                 <YAxis 
-                  stroke="#64748B" 
-                  fontSize={12} 
+                  stroke="#8b949e" 
+                  fontSize={10} 
                   tickLine={false} 
                   axisLine={false} 
+                  fontFamily="monospace"
                 />
                 <Tooltip 
-                  contentStyle={{ backgroundColor: '#1E293B', border: '1px solid #ffffff10', borderRadius: '8px' }}
-                  itemStyle={{ color: '#fff' }}
+                  contentStyle={{ backgroundColor: '#161b22', border: '1px solid #30363d', borderRadius: '4px' }}
+                  itemStyle={{ color: '#c9d1d9', fontSize: '12px' }}
                 />
                 <Area 
                   type="monotone" 
                   dataKey="projects" 
-                  stroke="#3B82F6" 
+                  stroke="#58a6ff" 
                   fillOpacity={1} 
                   fill="url(#colorProjects)" 
                 />
@@ -142,19 +142,17 @@ const AdminDashboard = () => {
         {/* Recent Activity */}
         <Card>
           <CardHeader>
-            <h3 className="font-bold">Recent Activity</h3>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-secondary font-mono">Recent Activity</h3>
           </CardHeader>
-          <CardContent className="space-y-6">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="flex gap-4">
-                <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent shrink-0">
-                  <TrendingUp size={16} />
-                </div>
+          <CardContent className="space-y-4">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="flex gap-3 text-[12px] border-l border-border pl-4 relative">
+                <div className="absolute -left-[4.5px] top-1.5 w-2 h-2 rounded-full bg-border"></div>
                 <div>
-                  <p className="text-sm">
-                    <span className="font-semibold">Rahul</span> updated <span className="text-accent font-semibold">School CRM</span> status to In Progress
+                  <p className="leading-tight">
+                    <span className="text-primary font-bold">Rahul</span> updated <span className="text-warning font-mono">School CRM</span> status
                   </p>
-                  <p className="text-xs text-secondary mt-1">2 hours ago</p>
+                  <p className="text-secondary mt-1 font-mono text-[10px]">2 hours ago</p>
                 </div>
               </div>
             ))}
