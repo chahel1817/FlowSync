@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
 });
 
 // Add token to requests
@@ -29,6 +29,10 @@ export const projectService = {
     const response = await api.get('/projects');
     return response.data;
   },
+  getById: async (id) => {
+    const response = await api.get(`/projects/${id}`);
+    return response.data;
+  },
   create: async (data) => {
     const response = await api.post('/projects', data);
     return response.data;
@@ -46,6 +50,13 @@ export const projectService = {
 export const customerService = {
   getAll: async () => {
     const response = await api.get('/customers');
+    return response.data;
+  },
+};
+
+export const userService = {
+  getAll: async () => {
+    const response = await api.get('/users');
     return response.data;
   },
 };

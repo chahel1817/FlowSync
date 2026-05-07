@@ -11,6 +11,7 @@ import ProjectManagement from './pages/admin/ProjectManagement';
 import KanbanBoard from './pages/admin/KanbanBoard';
 import CustomerDashboard from './pages/customer/CustomerDashboard';
 import CreateProject from './pages/customer/CreateProject';
+import ProjectDetails from './pages/customer/ProjectDetails';
 
 // Protected Route Component
 const ProtectedRoute = ({ children, allowedRole }) => {
@@ -65,6 +66,7 @@ function App() {
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<CustomerDashboard />} />
           <Route path="projects" element={<CustomerDashboard />} />
+          <Route path="projects/:id" element={<ProjectDetails />} />
           <Route path="create-project" element={<CreateProject />} />
           <Route path="settings" element={<div className="p-8 text-center text-secondary font-mono">Settings Page (Coming Soon)</div>} />
         </Route>

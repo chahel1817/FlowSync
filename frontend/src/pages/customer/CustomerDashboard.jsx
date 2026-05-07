@@ -15,6 +15,7 @@ import Button from '../../components/ui/Button';
 import Badge from '../../components/ui/Badge';
 import { useAuth } from '../../context/AuthContext';
 import { motion } from 'framer-motion';
+import { cn } from '../../utils/cn';
 
 const CustomerDashboard = () => {
   const { user } = useAuth();
@@ -27,121 +28,143 @@ const CustomerDashboard = () => {
     switch (status) {
       case 'Completed': return 'success';
       case 'In Progress': return 'accent';
-      case 'Review': return 'warning';
-      case 'Pending': return 'default';
+      case 'Review': return 'review';
+      case 'Pending': return 'warning';
       default: return 'default';
     }
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 font-mono">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Welcome back, {user?.name}!</h1>
-          <p className="text-secondary">Here's what's happening with your projects.</p>
+          <h1 className="text-2xl font-bold tracking-tight">WORKSPACE_OVERVIEW</h1>
+          <p className="text-[11px] text-secondary mt-1">// Welcome back, <span className="text-primary">{user?.name}</span>. Diagnostic logs show 0 errors.</p>
         </div>
         <Link to="/customer/create-project">
-          <Button className="flex items-center gap-2">
-            <Plus size={20} /> New Project Request
+          <Button className="flex items-center gap-2 h-10 text-xs font-bold px-6">
+            <Plus size={16} /> INITIALIZE_PROJECT
           </Button>
         </Link>
       </div>
 
       {/* Stats Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card>
-          <CardContent className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center text-accent">
-              <Briefcase size={24} />
-            </div>
-            <div>
-              <p className="text-sm text-secondary font-medium">My Projects</p>
-              <p className="text-2xl font-bold">{projects?.length || 0}</p>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-warning/10 rounded-xl flex items-center justify-center text-warning">
-              <Clock size={24} />
-            </div>
-            <div>
-              <p className="text-sm text-secondary font-medium">In Progress</p>
-              <p className="text-2xl font-bold">{projects?.filter(p => p.status === 'In Progress').length || 0}</p>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-success/10 rounded-xl flex items-center justify-center text-success">
-              <CheckCircle2 size={24} />
-            </div>
-            <div>
-              <p className="text-sm text-secondary font-medium">Completed</p>
-              <p className="text-2xl font-bold">{projects?.filter(p => p.status === 'Completed').length || 0}</p>
-            </div>
-          </CardContent>
-        </Card>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {[
+          { label: 'TOTAL_RESOURCES', value: projects?.length || 0, icon: Briefcase, color: 'text-primary' },
+          { label: 'ACTIVE_BUILDS', value: projects?.filter(p => p.status === 'In Progress').length || 0, icon: Clock, color: 'text-warning' },
+          { label: 'STABLE_RELEASES', value: projects?.filter(p => p.status === 'Completed').length || 0, icon: CheckCircle2, color: 'text-success' },
+          { label: 'REVIEW_PENDING', value: projects?.filter(p => p.status === 'Review').length || 0, icon: List, color: 'text-review' },
+        ].map((stat, i) => (
+          <Card key={i} className="border-border bg-sidebar/50">
+            <CardContent className="p-4 flex items-center gap-4">
+              <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center bg-white/5", stat.color)}>
+                <stat.icon size={20} />
+              </div>
+              <div>
+                <p className="text-[10px] text-secondary font-bold tracking-wider uppercase">{stat.label}</p>
+                <p className="text-xl font-bold">{stat.value}</p>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
 
-      {/* Projects List */}
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold">Current Projects</h2>
-          <div className="flex items-center gap-2">
-            <button className="p-1.5 bg-white/5 rounded-md text-accent border border-accent/20"><LayoutGrid size={18} /></button>
-            <button className="p-1.5 hover:bg-white/5 rounded-md text-secondary"><List size={18} /></button>
+      <div className="grid lg:grid-cols-3 gap-8">
+        {/* Projects Grid */}
+        <div className="lg:col-span-2 space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-sm font-bold tracking-widest uppercase text-secondary flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
+              ACTIVE_PROJECTS
+            </h2>
+            <div className="flex items-center gap-2">
+              <button className="p-1.5 bg-primary/10 rounded text-primary border border-primary/20"><LayoutGrid size={14} /></button>
+              <button className="p-1.5 hover:bg-white/5 rounded text-secondary transition-colors"><List size={14} /></button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {isLoading ? (
+              [1, 2, 3, 4].map(i => (
+                <div key={i} className="h-40 bg-card border border-border rounded animate-pulse"></div>
+              ))
+            ) : projects?.length === 0 ? (
+              <div className="col-span-full py-20 text-center bg-sidebar/30 border border-dashed border-border rounded-xl">
+                <p className="text-secondary text-sm font-mono">// No active resources found. Push a new project to begin.</p>
+              </div>
+            ) : projects?.map((project, idx) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.05 }}
+              >
+                <Link to={`/customer/projects/${project.id}`}>
+                  <Card className="hover:border-primary/50 transition-all cursor-pointer group h-full flex flex-col bg-card border-border">
+                    <CardHeader className="p-4 pb-2">
+                      <div className="flex items-center justify-between mb-3">
+                        <Badge variant={getStatusVariant(project.status)} className="text-[9px] px-1.5 rounded uppercase font-bold">
+                          {project.status}
+                        </Badge>
+                        <span className="text-[10px] text-secondary">{new Date(project.deadline).toLocaleDateString()}</span>
+                      </div>
+                      <h3 className="text-sm font-bold group-hover:text-primary transition-colors truncate">{project.title}</h3>
+                    </CardHeader>
+                    <CardContent className="p-4 pt-0 flex-1">
+                      <p className="text-[11px] text-secondary line-clamp-1 mb-4 font-mono">// {project.description}</p>
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-[10px]">
+                          <span className="text-secondary uppercase font-bold tracking-widest">DEPLOYMENT_PROGRESS</span>
+                          <span className="font-bold text-primary">{project.progress}%</span>
+                        </div>
+                        <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                          <div 
+                            className="h-full bg-primary transition-all duration-500" 
+                            style={{ width: `${project.progress}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    </CardContent>
+                    <div className="px-4 py-3 border-t border-border flex items-center justify-between bg-sidebar/30">
+                      <span className="text-[9px] text-secondary font-bold uppercase tracking-widest">priority: <span className="text-white">{project.priority}</span></span>
+                      <ChevronRight size={14} className="text-secondary group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                    </div>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {isLoading ? (
-            [1, 2, 3].map(i => (
-              <div key={i} className="h-48 bg-card border border-white/10 rounded-xl animate-pulse"></div>
-            ))
-          ) : projects?.length === 0 ? (
-            <div className="col-span-full py-12 text-center bg-white/[0.02] border border-dashed border-white/10 rounded-2xl">
-              <p className="text-secondary">No projects yet. Start by creating your first project request!</p>
-            </div>
-          ) : projects?.map((project, idx) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: idx * 0.1 }}
-            >
-              <Card className="hover:border-accent/50 transition-all cursor-pointer group h-full flex flex-col">
-                <CardHeader className="pb-2">
-                  <div className="flex items-center justify-between mb-2">
-                    <Badge variant={getStatusVariant(project.status)}>
-                      {project.status}
-                    </Badge>
-                    <span className="text-xs text-secondary">{new Date(project.deadline).toLocaleDateString()}</span>
+        {/* Sidebar - Latest Updates */}
+        <div className="space-y-4">
+          <h2 className="text-sm font-bold tracking-widest uppercase text-secondary">LATEST_LOGS</h2>
+          <Card className="border-border bg-sidebar/50">
+            <CardContent className="p-4 space-y-6">
+              {[
+                { type: 'build', msg: 'UI design for Project A completed', time: '2h ago', status: 'success' },
+                { type: 'sys', msg: 'Backend integration started', time: '5h ago', status: 'primary' },
+                { type: 'user', msg: 'New project request received', time: '1d ago', status: 'warning' },
+                { type: 'build', msg: 'Deployment successful for mobile_v2', time: '2d ago', status: 'success' },
+              ].map((update, i) => (
+                <div key={i} className="flex gap-3 relative pb-6 last:pb-0">
+                  {i !== 3 && <div className="absolute left-1.5 top-5 bottom-0 w-px bg-border"></div>}
+                  <div className={cn(
+                    "w-3 h-3 rounded-full mt-1.5 z-10 shrink-0",
+                    update.status === 'success' ? 'bg-success' : update.status === 'primary' ? 'bg-primary' : 'bg-warning'
+                  )}></div>
+                  <div className="space-y-1">
+                    <p className="text-[11px] text-[#c9d1d9] font-mono leading-relaxed">{update.msg}</p>
+                    <p className="text-[9px] text-secondary uppercase font-bold tracking-widest">{update.time} • type: {update.type}</p>
                   </div>
-                  <h3 className="font-bold group-hover:text-accent transition-colors">{project.title}</h3>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <p className="text-sm text-secondary line-clamp-2 mb-4">{project.description}</p>
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-secondary font-medium">Progress</span>
-                      <span className="font-bold">{project.progress}%</span>
-                    </div>
-                    <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-accent transition-all duration-500" 
-                        style={{ width: `${project.progress}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                </CardContent>
-                <div className="px-6 py-4 border-t border-white/10 flex items-center justify-between bg-white/5">
-                  <span className="text-xs text-secondary font-medium">Priority: <span className="text-white">{project.priority}</span></span>
-                  <ChevronRight size={18} className="text-secondary group-hover:text-accent group-hover:translate-x-1 transition-all" />
                 </div>
-              </Card>
-            </motion.div>
-          ))}
+              ))}
+              <button className="w-full py-2 text-[10px] text-secondary hover:text-white transition-colors border border-dashed border-border rounded mt-2">
+                VIEW_ALL_LOGS
+              </button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

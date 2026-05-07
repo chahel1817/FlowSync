@@ -30,44 +30,45 @@ const CreateProject = () => {
     mutationFn: projectService.create,
     onSuccess: () => {
       queryClient.invalidateQueries(['projects']);
-      toast.success('Project request submitted successfully!');
+      toast.success('// Project initialized successfully');
       navigate('/customer/dashboard');
     },
     onError: () => {
-      toast.error('Failed to submit request. Please try again.');
+      toast.error('// Deployment failed. Please check your network.');
     }
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.title || !formData.description || !formData.deadline) {
-      return toast.error('Please fill in all required fields');
+      return toast.error('// ERROR: Missing required fields');
     }
     mutation.mutate(formData);
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6 pb-12">
+    <div className="max-w-4xl mx-auto space-y-6 pb-12 font-mono">
       <button 
         onClick={() => navigate(-1)}
-        className="flex items-center gap-2 text-secondary hover:text-white transition-colors"
+        className="flex items-center gap-2 text-secondary hover:text-white transition-colors text-sm"
       >
-        <ArrowLeft size={20} /> Back to Dashboard
+        <ArrowLeft size={16} /> ../back_to_workspace
       </button>
 
       <div>
-        <h1 className="text-3xl font-bold">Create New Project</h1>
-        <p className="text-secondary mt-1">Fill out the details below to start your project request.</p>
+        <h1 className="text-2xl font-bold tracking-tight">INITIALIZE_NEW_PROJECT</h1>
+        <p className="text-[11px] text-secondary mt-1">// Fill out the configuration below to deploy your request.</p>
       </div>
 
-      <Card>
+      <Card className="border-border bg-card">
         <CardContent className="p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="grid md:grid-cols-2 gap-8">
               <div className="col-span-full">
                 <Input 
-                  label="Project Title"
-                  placeholder="e.g. E-commerce Mobile App"
+                  label="PROJECT_TITLE"
+                  placeholder="e.g. mobile_banking_app"
+                  className="bg-background font-mono text-sm h-11"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   required
@@ -75,11 +76,11 @@ const CreateProject = () => {
               </div>
 
               <div className="col-span-full">
-                <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-secondary ml-1">Description</label>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold text-secondary uppercase tracking-widest">DESCRIPTION</label>
                   <textarea 
-                    className="w-full bg-background border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all placeholder:text-white/20 min-h-[120px]"
-                    placeholder="Describe your project in detail..."
+                    className="w-full bg-background border border-border rounded p-3 text-sm text-white focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all placeholder:text-white/10 min-h-[120px]"
+                    placeholder="Describe your project requirements here..."
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     required
@@ -87,13 +88,13 @@ const CreateProject = () => {
                 </div>
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-sm font-medium text-secondary ml-1">Deadline</label>
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold text-secondary uppercase tracking-widest">DEADLINE_DATE</label>
                 <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-secondary" size={18} />
+                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-secondary" size={16} />
                   <input 
                     type="date"
-                    className="w-full bg-background border border-white/10 rounded-lg py-2 pl-10 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
+                    className="w-full bg-background border border-border rounded h-11 pl-10 pr-4 text-sm text-white focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all [color-scheme:dark]"
                     value={formData.deadline}
                     onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
                     required
@@ -101,28 +102,28 @@ const CreateProject = () => {
                 </div>
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-sm font-medium text-secondary ml-1">Priority Level</label>
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold text-secondary uppercase tracking-widest">PRIORITY_LEVEL</label>
                 <div className="relative">
-                  <AlertCircle className="absolute left-3 top-1/2 -translate-y-1/2 text-secondary" size={18} />
+                  <AlertCircle className="absolute left-3 top-1/2 -translate-y-1/2 text-secondary" size={16} />
                   <select 
-                    className="w-full bg-background border border-white/10 rounded-lg py-2 pl-10 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all appearance-none"
+                    className="w-full bg-background border border-border rounded h-11 pl-10 pr-4 text-sm text-white focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all appearance-none cursor-pointer"
                     value={formData.priority}
                     onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
                   >
-                    <option value="Low">Low Priority</option>
-                    <option value="Medium">Medium Priority</option>
-                    <option value="High">High Priority</option>
+                    <option value="Low">LOW_PRIORITY</option>
+                    <option value="Medium">MEDIUM_PRIORITY</option>
+                    <option value="High">HIGH_PRIORITY</option>
                   </select>
                 </div>
               </div>
 
               <div className="col-span-full">
-                <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-secondary ml-1">Technical Requirements (Optional)</label>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold text-secondary uppercase tracking-widest">REQUIREMENTS_SCHEMA</label>
                   <textarea 
-                    className="w-full bg-background border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all placeholder:text-white/20 min-h-[100px]"
-                    placeholder="e.g. React, Node.js, Stripe integration..."
+                    className="w-full bg-background border border-border rounded p-3 text-sm text-white focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all placeholder:text-white/10 min-h-[100px]"
+                    placeholder="e.g. { 'stack': ['react', 'node'], 'auth': 'jwt' }"
                     value={formData.requirements}
                     onChange={(e) => setFormData({ ...formData, requirements: e.target.value })}
                   ></textarea>
@@ -130,37 +131,37 @@ const CreateProject = () => {
               </div>
             </div>
 
-            <div className="pt-4 flex items-center gap-4">
+            <div className="pt-6 flex items-center gap-4">
               <Button 
                 type="submit" 
-                className="flex-1 flex items-center justify-center gap-2 h-12 text-lg"
+                className="flex-1 flex items-center justify-center gap-2 h-11 text-sm font-bold"
                 disabled={mutation.isLoading}
               >
                 {mutation.isLoading ? (
-                  <Loader2 className="animate-spin" size={24} />
+                  <Loader2 className="animate-spin" size={20} />
                 ) : (
                   <>
-                    Submit Project Request <Send size={20} />
+                    PUSH_TO_MAIN <Send size={18} />
                   </>
                 )}
               </Button>
               <Button 
                 type="button" 
                 variant="outline" 
-                className="h-12 px-6"
+                className="h-11 px-8 text-xs"
                 onClick={() => navigate(-1)}
               >
-                Cancel
+                CANCEL_INIT
               </Button>
             </div>
           </form>
         </CardContent>
       </Card>
       
-      <div className="bg-accent/10 border border-accent/20 rounded-xl p-4 flex gap-4">
-        <AlertCircle className="text-accent shrink-0" size={24} />
-        <p className="text-sm text-accent/80 leading-relaxed">
-          Once submitted, our team will review your requirements and assign a project manager. You'll receive a notification when the status changes to "In Progress".
+      <div className="bg-primary/5 border border-primary/20 rounded p-4 flex gap-4">
+        <AlertCircle className="text-primary shrink-0" size={20} />
+        <p className="text-[11px] text-secondary leading-relaxed">
+          <span className="text-primary font-bold">INFO:</span> Once pushed to main, our team will review the requirements and assign a specialized development unit. Deployment logs will be visible in your activity stream.
         </p>
       </div>
     </div>

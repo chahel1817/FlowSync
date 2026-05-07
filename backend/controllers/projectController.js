@@ -12,6 +12,23 @@ const getProjects = (req, res) => {
   }
 };
 
+const getProjectById = (req, res) => {
+  const { id } = req.params;
+  const projects = readData(projectsPath);
+  const project = projects.find(p => p.id === id);
+
+  if (!project) {
+    return res.status(404).json({ message: 'Project not found' });
+  }
+
+  // Check permissions
+  if (req.user.role !== 'admin' && project.customerId !== req.user.id) {
+    return res.status(403).json({ message: 'Not authorized' });
+  }
+
+  res.json(project);
+};
+
 const createProject = (req, res) => {
   const { title, description, deadline, priority, requirements } = req.body;
   const projects = readData(projectsPath);
@@ -63,6 +80,7 @@ const deleteProject = (req, res) => {
 
 module.exports = {
   getProjects,
+  getProjectById,
   createProject,
   updateProject,
   deleteProject

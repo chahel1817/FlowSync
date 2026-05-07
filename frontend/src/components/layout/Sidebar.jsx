@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
-  Briefcase, 
+  Briefcase,
   Kanban, 
   Users, 
   BarChart3, 
@@ -11,6 +11,7 @@ import {
   X,
   ChevronRight
 } from 'lucide-react';
+import Logo from '../ui/Logo';
 import { useAuth } from '../../context/AuthContext';
 import { cn } from '../../utils/cn';
 
@@ -52,9 +53,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       )}>
         {/* Activity Bar (VS Code style) */}
         <div className="w-16 bg-sidebar border-r border-border flex flex-col items-center py-4 gap-4">
-          <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center text-primary mb-4">
-            <Briefcase size={24} />
-          </div>
+          <Logo showText={false} size="xl" className="mb-4" />
           {links.map((link) => (
             <Link 
               key={link.path} 

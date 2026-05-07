@@ -5,8 +5,8 @@
     "description": "A comprehensive dashboard for school management.",
     "customer": "John Customer",
     "customerId": "2",
-    "status": "In Progress",
-    "progress": 70,
+    "status": "Completed",
+    "progress": 100,
     "deadline": "2026-06-10",
     "priority": "High",
     "requirements": "Need student attendance, grade tracking, and parent portal.",
@@ -19,8 +19,8 @@
     "deadline": "2026-05-10",
     "priority": "Medium",
     "requirements": "FHFHb",
-    "status": "Pending",
-    "progress": 0,
+    "status": "In Progress",
+    "progress": 20,
     "customerId": "2",
     "createdAt": "2026-05-06T18:08:19.540Z"
   }

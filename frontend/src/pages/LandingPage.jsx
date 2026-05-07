@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Briefcase, CheckCircle, BarChart, Users, ArrowRight, Zap, Shield, Globe } from 'lucide-react';
+import { CheckCircle, BarChart, Users, ArrowRight, Zap, Shield, Globe } from 'lucide-react';
+import Logo from '../components/ui/Logo';
 import Button from '../components/ui/Button';
 import { motion } from 'framer-motion';
 
@@ -9,12 +10,7 @@ const LandingPage = () => {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-background/50 backdrop-blur-md border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
-              <Briefcase size={20} className="text-white" />
-            </div>
-            <span className="text-xl font-bold tracking-tight font-mono">FlowSync</span>
-          </div>
+          <Logo />
           
           <div className="hidden md:flex items-center gap-8 text-[13px] text-secondary font-medium font-mono">
             <a href="#features" className="hover:text-white transition-colors">Features</a>
@@ -40,9 +36,7 @@ const LandingPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <span className="px-3 py-1 rounded bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold tracking-widest uppercase font-mono">
-              V4.2 RELEASED
-            </span>
+            
             <h1 className="mt-8 text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] font-mono">
               Manage Projects <span className="text-primary italic underline decoration-wavy underline-offset-8">Smarter</span>
             </h1>
@@ -115,12 +109,7 @@ const LandingPage = () => {
       {/* Footer */}
       <footer className="py-12 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
-              <Briefcase size={18} className="text-white" />
-            </div>
-            <span className="text-xl font-bold tracking-tight">FlowSync</span>
-          </div>
+          <Logo />
           <p className="text-secondary text-sm">© 2026 FlowSync CRM. Built with precision for modern teams.</p>
           <div className="flex gap-6 text-secondary text-sm">
             <a href="#" className="hover:text-white">Privacy</a>
