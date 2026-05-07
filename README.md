@@ -56,7 +56,7 @@ npm run dev # Running on http://localhost:5173
 | Role | Email | Password |
 | :--- | :--- | :--- |
 | **Administrator** | `admin@gmail.com` | `admin123!` |
-| **Customer** | `customer@gmail.com` | `john123!` |
+| **Customer** | `customer@gmail.com` | `customer123!` |
 
 ---
 

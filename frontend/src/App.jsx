@@ -12,6 +12,7 @@ import KanbanBoard from './pages/admin/KanbanBoard';
 import CustomerDashboard from './pages/customer/CustomerDashboard';
 import CreateProject from './pages/customer/CreateProject';
 import ProjectDetails from './pages/customer/ProjectDetails';
+import Settings from './pages/Settings';
 
 // Protected Route Component
 const ProtectedRoute = ({ children, allowedRole }) => {
@@ -54,7 +55,7 @@ function App() {
           <Route path="kanban" element={<KanbanBoard />} />
           <Route path="customers" element={<div className="p-8 text-center text-secondary font-mono">Customers Page (Coming Soon)</div>} />
           <Route path="analytics" element={<div className="p-8 text-center text-secondary font-mono">Analytics Page (Coming Soon)</div>} />
-          <Route path="settings" element={<div className="p-8 text-center text-secondary font-mono">Settings Page (Coming Soon)</div>} />
+          <Route path="settings" element={<Settings />} />
         </Route>
 
         {/* Customer Routes */}
@@ -68,7 +69,7 @@ function App() {
           <Route path="projects" element={<CustomerDashboard />} />
           <Route path="projects/:id" element={<ProjectDetails />} />
           <Route path="create-project" element={<CreateProject />} />
-          <Route path="settings" element={<div className="p-8 text-center text-secondary font-mono">Settings Page (Coming Soon)</div>} />
+          <Route path="settings" element={<Settings />} />
         </Route>
 
         {/* 404 */}

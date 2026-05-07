@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Mail, Lock, ArrowRight, Loader2, Shield, Users } from 'lucide-react';
+import { Mail, Lock, ArrowRight, Loader2, Shield, Users, Eye, EyeOff } from 'lucide-react';
 import Logo from '../../components/ui/Logo';
 import { useAuth } from '../../context/AuthContext';
 import { authService } from '../../services/api';
@@ -17,6 +17,7 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -132,17 +133,24 @@ const LoginPage = () => {
                   required
                 />
               </div>
-              <div className="relative">
-                <Lock className="absolute left-3 top-[38px] text-secondary" size={16} />
+              <div className="relative group">
+                <Lock className="absolute left-3 top-[38px] text-secondary group-focus-within:text-accent transition-colors" size={16} />
                 <Input
                   label="PASSWORD"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
-                  className="pl-10 h-11 font-mono text-sm"
+                  className="pl-10 pr-10 h-11 font-mono text-sm"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-[38px] text-secondary hover:text-white transition-colors"
+                >
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
               </div>
             </div>
 
