@@ -2,7 +2,7 @@
 
 FlowSync is a high-performance, developer-centric CRM designed for seamless project management between clients and development teams. Built with a **VS Code-inspired design system**, it offers a professional, diagnostic-first interface for managing project lifecycles.
 
-![FlowSync Dashboard](https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1000)
+
 
 ## 🌌 Design Philosophy
 FlowSync breaks away from generic SaaS designs by adopting a **"Developer Workspace"** aesthetic:
